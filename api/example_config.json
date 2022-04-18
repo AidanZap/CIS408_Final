@@ -1,0 +1,10 @@
+{
+    "user": "rename these fields",
+    "password": "with your SQL Server db config",
+    "server": "then save the file",
+    "database": " as config.json",
+    "port": "port is usually 1433",
+    "options": {
+        "trustServerCertificate": true
+    }
+}
