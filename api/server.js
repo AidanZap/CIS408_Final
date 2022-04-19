@@ -1,5 +1,7 @@
 const express = require('express');
+const db = require('./database');
 const app = express();
+db.initDatabase();
 const PORT = 5000
 
 // Ingredients
@@ -19,7 +21,7 @@ const recipeRouter = express.Router();
 app.use('/recipe', recipeRouter);
 
 recipeRouter.post("/", (req, res) => {
-    let payload = req.body;
+    let payload = req.params;
     process.stdout.write(`POSTING | ${payload}\n`);
     res.sendStatus(200);
 })
@@ -29,10 +31,49 @@ recipeRouter.post("/", (req, res) => {
 const recipeIngredientRouter = express.Router();
 app.use('/recipeIngredient', recipeIngredientRouter);
 
-recipeIngredientRouter.post("/", (req, res) => {
-    let payload = req.body;
-    process.stdout.write(`POSTING | ${payload}\n`);
-    res.sendStatus(200);
+recipeIngredientRouter.get("/", async (req, res) => {
+    let recipeID = req.query.recipeID;
+    if (!recipeID) {
+        res.status("400").send("Endpoint requires recipeID");
+        return;
+    }
+    let result = await db.getRecipeIngredients(recipeID)
+    if (!result) {
+        res.status("500").send("Database error");
+        return;
+    }
+    res.status("200").send(result);
+});
+
+recipeIngredientRouter.post("/", async (req, res) => {
+    let recipeID = req.query.recipeID;
+    let ingredientID = req.query.ingredientID;
+    let quantity = req.query.quantity;
+    if (!recipeID || !ingredientID || !quantity) {
+        res.status("400").send("Endpoint requires recipeID, ingredientID, and quantity");
+        return;
+    }
+    let result = await db.insertRecipeIngredient(recipeID, ingredientID, quantity);
+    if (!result) {
+        res.status("500").send("Database error");
+        return;
+    }
+    res.sendStatus("200");
+});
+
+recipeIngredientRouter.delete("/", async (req, res) => {
+    let recipeID = req.query.recipeID;
+    let ingredientID = req.query.ingredientID;
+    if (!recipeID || !ingredientID) {
+        res.status("400").send("Endpoint requires recipeID, and ingredientID");
+        return;
+    }
+    let result = await db.deleteRecipeIngredient(recipeID, ingredientID);
+    if (!result) {
+        res.status("500").send("Database error");
+        return;
+    }
+    res.sendStatus("200");
 })
 
 // Init Server

@@ -2,10 +2,11 @@ const sql = require("mssql");
 const fs = require("fs/promises");
 let config;
 
-const readConfig = async () => {
+const initDatabase = async () => {
     try {
         const data = await fs.readFile("./api/config.json");
         config = JSON.parse(data);
+        process.stdout.write("Config loaded properly, database ready!\n");
     } catch(err) {
         process.stdout.write(`Error reading config\n${err}\n`);
     }
@@ -20,7 +21,7 @@ const makeQuery = async (queryString) => {
             result = await sql.query(queryString);
             if (result) process.stdout.write("SQL command completed\n");
         } else {
-            process.stdout.write("Error loading config");
+            process.stdout.write("Error loading config\n");
         }
     } catch (err) {
         process.stdout.write(`Error executing SQL\n${err}\n`);
@@ -45,7 +46,11 @@ const createTables = async () => {
     await makeQuery(`CREATE TABLE RecipeIngredients (
         RecipeID int NOT NULL FOREIGN KEY REFERENCES Recipes(RecipeID),
         IngredientID int NOT NULL FOREIGN KEY REFERENCES Ingredients(IngredientID),
-        Quantity int NOT NULL
+        Quantity int NOT NULL,
+        CONSTRAINT unique_recipe_ingredient UNIQUE CLUSTERED 
+        (
+            RecipeID, IngredientID
+        )
     )`);
 }
 
@@ -71,9 +76,11 @@ const deleteRecipeIngredient = async (recipeID, ingredientID) => {
 }
 
 const main = async () => {
-    await readConfig();
+    await initDatabase();
     let result = await getRecipeIngredients(1);
     process.stdout.write(JSON.stringify(result));
 }
 
-main();
+module.exports = {
+    initDatabase, getRecipeIngredients, insertRecipeIngredient, deleteRecipeIngredient
+};
