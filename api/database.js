@@ -1,10 +1,11 @@
-const sql = require("mssql");
+const sql = require("mssql/msnodesqlv8");
 const fs = require("fs/promises");
 let config;
 
+
 const readConfig = async () => {
     try {
-        const data = await fs.readFile("./api/config.json");
+        const data = await fs.readFile("./api/example_config.json");
         config = JSON.parse(data);
     } catch(err) {
         process.stdout.write(`Error reading config\n${err}\n`);

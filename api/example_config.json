@@ -1,10 +1,11 @@
-{
-    "user": "rename these fields",
-    "password": "with your SQL Server db config",
-    "server": "then save the file",
-    "database": " as config.json",
-    "port": "port is usually 1433",
+    {
+    "server": "DESKTOP-FKS3DA5\\MSSQLSERVER2",
+    "database": "REACTAPP",
+    "driver": "msnodesqlv8",
+    "port": "1433",
     "options": {
+        "trustedConnection": true,
         "trustServerCertificate": true
+
     }
 }
