@@ -20,10 +20,50 @@ ingredientRouter.post("/", (req, res) => {
 const recipeRouter = express.Router();
 app.use('/recipe', recipeRouter);
 
-recipeRouter.post("/", (req, res) => {
-    let payload = req.params;
-    process.stdout.write(`POSTING | ${payload}\n`);
-    res.sendStatus(200);
+recipeRouter.get("/", async (req, res) => {
+    let recipeID = req.query.recipeID;
+    if(!recipeID) {
+        res.status("400").send("Endpoint requires recipeID");
+        return;
+    }
+    let result = await db.getRecipes(recipeID)
+    if (!result) {
+        res.status("500").send("Database error");
+        return;
+    }
+    res.status("200").send(result);
+
+});
+
+recipeRouter.post("/", async (req, res) => {
+    let recipeID = req.query.recipeID;
+    let name = req.query.name;
+
+    if(!recipeID || !name) {
+        res.status("400").send("Endpoint requires recipeID and name");
+        return;
+    }
+
+    let result = await db.insertRecipes(recipeID, name);
+    if (!result) {
+        res.status("500").send("Database error");
+        return;
+    }
+    res.sendStatus("200");
+});
+
+recipe.delete("/", async (req, res) => {
+    let recipeID = req.query.recipeID;
+    if (!recipeID) {
+        res.status("400").send("Endpoint requires recipeID");
+        return;
+    }
+    let result = await db.deleteRecipes(recipeID);
+    if (!result) {
+        res.status("500").send("Database error");
+        return;
+    }
+    res.sendStatus("200");
 })
 
 // Recipe Ingredients

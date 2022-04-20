@@ -54,6 +54,22 @@ const createTables = async () => {
     )`);
 }
 
+const getRecipes = async (recipeID) => {
+    let result = await makeQuery(`SELECT ri.Name, ri.RecipeID WHERE ri.RecipeID=${recipeID}`);
+    let recipes = [];
+    result.recordset.forEach((record) => {
+        recipes.push({"Name": record.Name})})
+        return recipes;
+}
+const insertRecipes = async (recipeID, name) => {
+    return await makeQuery(`INSERT INTO Recipes (RecipeID, Name)
+        VALUES (${recipeID}, ${name})`);
+}
+
+const deleteRecipes = async (recipeID) => {
+    return await makeQuery(`DELETE FROM Recipes WHERE RecipeID = ${recipeID}`);
+}
+
 const getRecipeIngredients = async (recipeID) => {
     let result = await makeQuery(`SELECT i.Name, ri.Quantity, i.Unit, i.Category FROM Ingredients i
         JOIN RecipeIngredients ri ON i.IngredientID = ri.IngredientID
@@ -82,5 +98,6 @@ const main = async () => {
 }
 
 module.exports = {
-    initDatabase, getRecipeIngredients, insertRecipeIngredient, deleteRecipeIngredient
+    initDatabase, getRecipeIngredients, insertRecipeIngredient, deleteRecipeIngredient, getRecipes, 
+    insertRecipes, deleteRecipes
 };
