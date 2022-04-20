@@ -1,0 +1,297 @@
+[
+    {
+        "name": "Zucchini",
+        "unit": "each",
+        "category": "Produce"
+    },
+    {
+        "name": "Red Pepper",
+        "unit": "each",
+        "category": "Produce"
+    },
+    {
+        "name": "Yellow Pepper",
+        "unit": "each",
+        "category": "Produce"
+    },
+    {
+        "name": "Green Pepper",
+        "unit": "each",
+        "category": "Produce"
+    },
+    {
+        "name": "Tomato",
+        "unit": "each",
+        "category": "Produce"
+    },
+    {
+        "name": "Roma Tomato",
+        "unit": "each",
+        "category": "Produce"
+    },
+    {
+        "name": "Scallions",
+        "unit": "each",
+        "category": "Produce"
+    },
+    {
+        "name": "Onion",
+        "unit": "each",
+        "category": "Produce"
+    },
+    {
+        "name": "Red Onion",
+        "unit": "each",
+        "category": "Produce"
+    },
+    {
+        "name": "Lemon",
+        "unit": "each",
+        "category": "Produce"
+    },
+    {
+        "name": "Lime",
+        "unit": "each",
+        "category": "Produce"
+    },
+    {
+        "name": "Poblano Pepper",
+        "unit": "each",
+        "category": "Produce"
+    },
+    {
+        "name": "Green Beans",
+        "unit": "oz",
+        "category": "Produce"
+    },
+    {
+        "name": "Cilantro",
+        "unit": "oz",
+        "category": "Produce"
+    },
+    {
+        "name": "Potato",
+        "unit": "each",
+        "category": "Produce"
+    },
+    {
+        "name": "Gold Potatoes",
+        "unit": "oz",
+        "category": "Produce"
+    },
+    {
+        "name": "Sweet Potato",
+        "unit": "each",
+        "category": "Produce"
+    },
+    {
+        "name": "Jalapeno",
+        "unit": "each",
+        "category": "Produce"
+    },
+    {
+        "name": "Carrot",
+        "unit": "oz",
+        "category": "Produce"
+    },
+    {
+        "name": "Ginger",
+        "unit": "oz",
+        "category": "Produce"
+    },
+    {
+        "name": "Long Green Pepper",
+        "unit": "each",
+        "category": "Produce"
+    },
+    {
+        "name": "Peas",
+        "unit": "oz",
+        "category": "Produce"
+    },
+    {
+        "name": "Shallot",
+        "unit": "each",
+        "category": "Produce"
+    },
+    {
+        "name": "Parsley",
+        "unit": "oz",
+        "category": "Produce"
+    },
+    {
+        "name": "Cucumber",
+        "unit": "each",
+        "category": "Produce"
+    },
+    {
+        "name": "Garlic",
+        "unit": "clove(s)",
+        "category": "Produce"
+    },
+    {
+        "name": "Button Mushrooms",
+        "unit": "oz",
+        "category": "Produce"
+    },
+    {
+        "name": "Dill",
+        "unit": "oz",
+        "category": "Produce"
+    },
+    {
+        "name": "Broccoli",
+        "unit": "oz",
+        "category": "Produce"
+    },
+    {
+        "name": "Chili Pepper",
+        "unit": "each",
+        "category": "Produce"
+    },
+    {
+        "name": "Arugula",
+        "unit": "oz",
+        "category": "Produce"
+    },
+    {
+        "name": "Asparagus",
+        "unit": "oz",
+        "category": "Produce"
+    },
+    {
+        "name": "Cherries",
+        "unit": "oz",
+        "category": "Produce"
+    },
+    {
+        "name": "Artichoke",
+        "unit": "each",
+        "category": "Produce"
+    },
+    {
+        "name": "Blackberries",
+        "unit": "oz",
+        "category": "Produce"
+    },
+    {
+        "name": "Strawberries",
+        "unit": "oz",
+        "category": "Produce"
+    },
+    {
+        "name": "Squash",
+        "unit": "each",
+        "category": "Produce"
+    },
+    {
+        "name": "Apple",
+        "unit": "each",
+        "category": "Produce"
+    },
+    {
+        "name": "Cabbage",
+        "unit": "oz",
+        "category": "Produce"
+    },
+    {
+        "name": "Cauliflower",
+        "unit": "each",
+        "category": "Produce"
+    },
+    {
+        "name": "Avocado",
+        "unit": "each",
+        "category": "Produce"
+    },
+    {
+        "name": "Basil",
+        "unit": "oz",
+        "category": "Produce"
+    },
+    {
+        "name": "Pineapple",
+        "unit": "oz",
+        "category": "Produce"
+    },
+    {
+        "name": "Corn",
+        "unit": "oz",
+        "category": "Produce"
+    },
+    {
+        "name": "Eggplant",
+        "unit": "each",
+        "category": "Produce"
+    },
+    {
+        "name": "Green Onion",
+        "unit": "each",
+        "category": "Produce"
+    },
+    {
+        "name": "Orange",
+        "unit": "each",
+        "category": "Produce"
+    },
+    {
+        "name": "Lettuce",
+        "unit": "oz",
+        "category": "Produce"
+    },
+    {
+        "name": "Raspberries",
+        "unit": "oz",
+        "category": "Produce"
+    },
+    {
+        "name": "Spinach",
+        "unit": "oz",
+        "category": "Produce"
+    },
+    {
+        "name": "Blueberries",
+        "unit": "oz",
+        "category": "Produce"
+    },
+    {
+        "name": "Kale",
+        "unit": "oz",
+        "category": "Produce"
+    },
+    {
+        "name": "Peach",
+        "unit": "each",
+        "category": "Produce"
+    },
+    {
+        "name": "Pear",
+        "unit": "each",
+        "category": "Produce"
+    },
+    {
+        "name": "Celery",
+        "unit": "oz",
+        "category": "Produce"
+    },
+    {
+        "name": "Edamame",
+        "unit": "oz",
+        "category": "Produce"
+    },
+    {
+        "name": "Kiwi",
+        "unit": "each",
+        "category": "Produce"
+    },
+    {
+        "name": "Grapes",
+        "unit": "oz",
+        "category": "Produce"
+    },
+    {
+        "name": "Watermelon",
+        "unit": "oz",
+        "category": "Produce"
+    }
+]

@@ -54,6 +54,18 @@ const createTables = async () => {
     )`);
 }
 
+const insertBaseIngredients = async () => {
+    try {
+        const data = JSON.parse(await fs.readFile("./api/base_ingredients.json"));
+        data.forEach((i) => {
+            process.stdout.write(`${i["name"]} | ${i["unit"]} | ${i["category"]}\n`)
+            //TODO Call ingredient insert here
+        });
+    } catch(err) {
+        process.stdout.write(`Error reading base recipes\n${err}\n`);
+    }
+}
+
 const getRecipes = async (recipeID) => {
     let result = await makeQuery(`SELECT ri.Name, ri.RecipeID WHERE ri.RecipeID=${recipeID}`);
     let recipes = [];
@@ -61,9 +73,8 @@ const getRecipes = async (recipeID) => {
         recipes.push({"Name": record.Name})})
         return recipes;
 }
-const insertRecipes = async (recipeID, name) => {
-    return await makeQuery(`INSERT INTO Recipes (RecipeID, Name)
-        VALUES (${recipeID}, ${name})`);
+const insertRecipes = async (name) => {
+    return await makeQuery(`INSERT INTO Recipes (Name) VALUES (${name})`);
 }
 
 const deleteRecipes = async (recipeID) => {
@@ -93,9 +104,10 @@ const deleteRecipeIngredient = async (recipeID, ingredientID) => {
 
 const main = async () => {
     await initDatabase();
-    let result = await getRecipeIngredients(1);
-    process.stdout.write(JSON.stringify(result));
+    insertBaseIngredients();
 }
+
+main();
 
 module.exports = {
     initDatabase, getRecipeIngredients, insertRecipeIngredient, deleteRecipeIngredient, getRecipes, 
