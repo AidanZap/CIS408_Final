@@ -52,7 +52,7 @@ recipeRouter.post("/", async (req, res) => {
     res.sendStatus("200");
 });
 
-recipe.delete("/", async (req, res) => {
+recipeRouter.delete("/", async (req, res) => {
     let recipeID = req.query.recipeID;
     if (!recipeID) {
         res.status("400").send("Endpoint requires recipeID");
