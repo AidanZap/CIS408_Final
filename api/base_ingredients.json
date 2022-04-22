@@ -251,7 +251,7 @@
     },
     {
         "name": "Blueberries",
-        "unit": "oz",
+        "unit": "none",
         "category": "Produce"
     },
     {
@@ -271,12 +271,12 @@
     },
     {
         "name": "Celery",
-        "unit": "oz",
+        "unit": "none",
         "category": "Produce"
     },
     {
         "name": "Edamame",
-        "unit": "oz",
+        "unit": "none",
         "category": "Produce"
     },
     {
@@ -286,12 +286,82 @@
     },
     {
         "name": "Grapes",
-        "unit": "oz",
+        "unit": "none",
         "category": "Produce"
     },
     {
         "name": "Watermelon",
-        "unit": "oz",
+        "unit": "none",
         "category": "Produce"
+    },
+    {
+        "name": "Milk",
+        "unit": "cups",
+        "category": "Dairy"
+    },
+    {
+        "name": "Sour Cream",
+        "unit": "tbsp",
+        "category": "Dairy"
+    },
+    {
+        "name": "Cheddar Cheese",
+        "unit": "cups",
+        "category": "Dairy"
+    },
+    {
+        "name": "Feta Cheese",
+        "unit": "cups",
+        "category": "Dairy"
+    },
+    {
+        "name": "Monterey Jack Cheese",
+        "unit": "cups",
+        "category": "Dairy"
+    },
+    {
+        "name": "Colby Jack Cheese",
+        "unit": "cups",
+        "category": "Dairy"
+    },
+    {
+        "name": "Mexican Cheese Blend",
+        "unit": "cups",
+        "category": "Dairy"
+    },
+    {
+        "name": "Butter",
+        "unit": "oz",
+        "category": "Dairy"
+    },
+    {
+        "name": "Eggs",
+        "unit": "each",
+        "category": "Dairy"
+    },
+    {
+        "name": "Cottage Cheese",
+        "unit": "cups",
+        "category": "Dairy"
+    },
+    {
+        "name": "Yogurt",
+        "unit": "cups",
+        "category": "Dairy"
+    },
+    {
+        "name": "Whip Cream",
+        "unit": "none",
+        "category": "Dairy"
+    },
+    {
+        "name": "Pickles",
+        "unit": "none",
+        "category": "Dairy"
+    },
+    {
+        "name": "",
+        "unit": "oz",
+        "category": "Meat/Deli"
     }
 ]
