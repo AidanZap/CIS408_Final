@@ -4,18 +4,59 @@ const app = express();
 db.initDatabase();
 const PORT = 5000
 
-// Ingredients
+// Endpoints for Ingredients Table 
 
 const ingredientRouter = express.Router();
 app.use('/ingredient', ingredientRouter);
 
+ingredientRouter.get("/", async (req, res) => {
+    let ingredientID = req.query.ingredientID;
+    if(!ingredientID) {
+        res.status("400").send("Endpoint reuires ingredientID");
+        return;
+    }
+    let result = await db.getRecipeIngredients(ingredientID)
+    if (!result) {
+        res.status("500").send("Database error");
+        return;
+    }
+    res.status("200").send(result);
+    
+});
+
 ingredientRouter.post("/", (req, res) => {
-    let payload = req.body;
-    process.stdout.write(`POSTING | ${payload}\n`);
-    res.sendStatus(200);
+    let ingredientID = req.query.ingredientID;
+    let name = req.query.name;
+    let unit = req.query.unit;
+    let category = req.query.category;
+    if (!ingredientID|| !name || !unit || !category) {
+        res.status("400").send("Endpoint requires: ingredientID, name, unit, and category");
+        return;
+    }
+    let result = await db.insertIngredients(ingredientID, name, unit, category);
+    if (!result) {
+        res.status("500").send("Database error");
+        return;
+    }
+    res.sendStatus("200");
+});
+
+ingredientRouter.delete("/", (req, res) =>{
+    let ingredientID = req.query.ingredientID;
+    if (!ingredientID) {
+        res.status("400").send("Endpoint requires ingredentID");
+        return;
+    }
+    let result = await db.deleteIngredients(ingredientID);
+    if (!result) {
+        res.status("500").send("Database error");
+        return;
+    }
+    res.sendStatus("200");
+
 })
 
-// Recipes
+// Endpoints for Recipes Table
 
 const recipeRouter = express.Router();
 app.use('/recipe', recipeRouter);
@@ -52,7 +93,7 @@ recipeRouter.post("/", async (req, res) => {
     res.sendStatus("200");
 });
 
-recipe.delete("/", async (req, res) => {
+recipeRouter.delete("/", async (req, res) => {
     let recipeID = req.query.recipeID;
     if (!recipeID) {
         res.status("400").send("Endpoint requires recipeID");
@@ -66,7 +107,7 @@ recipe.delete("/", async (req, res) => {
     res.sendStatus("200");
 })
 
-// Recipe Ingredients
+// Endpoints for Recipe Ingredients Table 
 
 const recipeIngredientRouter = express.Router();
 app.use('/recipeIngredient', recipeIngredientRouter);
