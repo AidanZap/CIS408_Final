@@ -76,9 +76,8 @@ const getRecipes = async (recipeID) => {
         recipes.push({"Name": record.Name})})
         return recipes;
 }
-const insertRecipes = async (recipeID, name) => {
-    return await makeQuery(`INSERT INTO Recipes (RecipeID, Name)
-        VALUES (${recipeID}, ${name})`);
+const insertRecipes = async (name) => {
+    return await makeQuery(`INSERT INTO Recipes (Name) VALUES (${name})`);
 }
 
 const deleteRecipes = async (recipeID) => {
@@ -108,9 +107,10 @@ const deleteRecipeIngredient = async (recipeID, ingredientID) => {
 
 const main = async () => {
     await initDatabase();
-    let result = await getRecipeIngredients(1);
-    process.stdout.write(JSON.stringify(result));
+    insertBaseIngredients();
 }
+
+main();
 
 module.exports = {
     initDatabase, getRecipeIngredients, insertRecipeIngredient, deleteRecipeIngredient, getRecipes, 

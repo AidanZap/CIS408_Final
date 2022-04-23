@@ -1,5 +1,6 @@
 {
   "devDependencies": {
+    "create-react-app": "^5.0.1",
     "express": "^4.17.3",
     "mssql": "^8.1.0"
   },
