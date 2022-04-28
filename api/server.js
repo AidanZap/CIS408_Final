@@ -3,6 +3,11 @@ const db = require('./database');
 const app = express();
 db.initDatabase();
 const PORT = 5000
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+});
 
 // Endpoints for Ingredients Table 
 
@@ -12,7 +17,7 @@ app.use('/ingredient', ingredientRouter);
 ingredientRouter.get("/", async (req, res) => {
     let ingredientID = req.query.ingredientID;
     if(!ingredientID) {
-        res.status("400").send("Endpoint reuires ingredientID");
+        res.status("400").send("Endpoint requires ingredientID");
         return;
     }
     let result = await db.getRecipeIngredients(ingredientID)
@@ -24,16 +29,15 @@ ingredientRouter.get("/", async (req, res) => {
     
 });
 
-ingredientRouter.post("/", (req, res) => {
-    let ingredientID = req.query.ingredientID;
+ingredientRouter.post("/", async (req, res) => {
     let name = req.query.name;
     let unit = req.query.unit;
     let category = req.query.category;
-    if (!ingredientID|| !name || !unit || !category) {
+    if (!name || !unit || !category) {
         res.status("400").send("Endpoint requires: ingredientID, name, unit, and category");
         return;
     }
-    let result = await db.insertIngredients(ingredientID, name, unit, category);
+    let result = await db.insertIngredients(name, unit, category);
     if (!result) {
         res.status("500").send("Database error");
         return;
@@ -41,7 +45,7 @@ ingredientRouter.post("/", (req, res) => {
     res.sendStatus("200");
 });
 
-ingredientRouter.delete("/", (req, res) =>{
+ingredientRouter.delete("/", async (req, res) =>{
     let ingredientID = req.query.ingredientID;
     if (!ingredientID) {
         res.status("400").send("Endpoint requires ingredentID");
@@ -54,7 +58,7 @@ ingredientRouter.delete("/", (req, res) =>{
     }
     res.sendStatus("200");
 
-})
+});
 
 // Endpoints for Recipes Table
 
@@ -77,15 +81,14 @@ recipeRouter.get("/", async (req, res) => {
 });
 
 recipeRouter.post("/", async (req, res) => {
-    let recipeID = req.query.recipeID;
     let name = req.query.name;
 
-    if(!recipeID || !name) {
-        res.status("400").send("Endpoint requires recipeID and name");
+    if(!name) {
+        res.status("400").send("Endpoint requires name");
         return;
     }
 
-    let result = await db.insertRecipes(recipeID, name);
+    let result = await db.insertRecipes(name);
     if (!result) {
         res.status("500").send("Database error");
         return;
@@ -105,7 +108,7 @@ recipeRouter.delete("/", async (req, res) => {
         return;
     }
     res.sendStatus("200");
-})
+});
 
 // Endpoints for Recipe Ingredients Table 
 
