@@ -33,13 +33,13 @@ const GroceryList: React.FC<IProps> = (props: IProps) => {
         }
     }
 
-    return <Stack direction="column" divider={<Divider orientation="horizontal" />} spacing={3} >
+    return <Stack direction="column" divider={<Divider orientation="horizontal" />} spacing={3}>
         <Stack direction="row" spacing={3} sx={{mt: 3}}>
             <Typography variant="h4">Number of Meals:</Typography>
             <Increment currentValue={numberOfMeals} updateFunction={(num: number) => setNumberOfMeals(numberOfMeals + num)} />
+            <Button variant="contained" color="secondary">Create groceryList</Button>
         </Stack>
         <GroceryCardGrid recipes={recipes} selectedRecipes={selectedRecipes} changeQuantity={changeRecipeQuantity} />
-        <Button>test</Button>
     </Stack>;
 }
 

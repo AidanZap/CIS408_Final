@@ -16,9 +16,9 @@ const GroceryCardGrid: React.FC<IProps> = (props: IProps) => {
         return props.selectedRecipes[recipeID];
     }
 
-    return <Grid container direction="row" spacing={2} justifyContent="flex-start" alignItems="flex-start" sx={{overflowY: "scroll"}}>
+    return <Grid container direction="row" spacing={2} justifyContent="flex-start" alignItems="flex-start">
         {props.recipes.map((recipe: Recipe, index: number) => {
-            return <Grid item xs={4} key={index}>
+            return <Grid item xs={12} md={6} lg={4} key={index}>
                 <GroceryCard name={recipe.name} image={null} amount={quantity(recipe.recipeID)} updateFunction={(number) => {props.changeQuantity(recipe.recipeID, number)}} />
             </Grid>
         })}

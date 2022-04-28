@@ -10,7 +10,7 @@ interface IProps {
 
 const Increment: React.FC<IProps> = (props: IProps) => {
 
-    return <Stack direction="row" justifyContent="space-between" sx={{border: "1px solid", width: "120px", borderRadius: "25px"}}>
+    return <Stack direction="row" justifyContent="space-between" sx={{border: "1px solid", width: "118px", maxHeight: "40px", borderRadius: "25px"}}>
         <Fab size="small" color="secondary" aria-label="decrease" onClick={() => {props.updateFunction(-1)}}>
             <RemoveIcon />
         </Fab>
