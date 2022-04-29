@@ -2,6 +2,7 @@ import React from 'react';
 import { Stack, Button, Divider } from "@mui/material";
 import { Recipe } from "../../interfaces";
 import RecipeCardGrid from "./RecipeCardGrid";
+import RecipeAPI from "./RecipeAPI";
 
 interface IProps {
 
@@ -9,12 +10,19 @@ interface IProps {
 
 const Recipes: React.FC<IProps> = (props: IProps) => {
 
-    const testRecipes = [{recipeID: 1, name: "sauce"}, {recipeID: 2, name: "meatballs"},
-                            {recipeID: 3, name: "sauce"}, {recipeID: 4, name: "meatballs"},
-                            {recipeID: 5, name: "sauce"}, {recipeID: 6, name: "meatballs"},
-                            {recipeID: 7, name: "sauce"}, {recipeID: 8, name: "meatballs"}];
+    const [recipes, setRecipes] = React.useState<Recipe[] | null>(null);
 
-    const [recipes, setRecipes] = React.useState<Recipe[]>(testRecipes);
+    React.useEffect(() => {
+        let isMounted = true;
+        RecipeAPI.getRecipes().then((result: Recipe[]) => {
+            if (isMounted) {
+                setRecipes(result);
+            }
+        }).catch((er: Error) => {
+            console.log(`Error fetching Recipes | ${er}`);
+        });
+        return () => { isMounted = false; }
+    }, []);
 
     const editRecipe = (recipeID: number) => {
         console.log(recipeID);

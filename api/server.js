@@ -63,15 +63,10 @@ ingredientRouter.delete("/", async (req, res) =>{
 // Endpoints for Recipes Table
 
 const recipeRouter = express.Router();
-app.use('/recipe', recipeRouter);
+app.use('/recipes', recipeRouter);
 
 recipeRouter.get("/", async (req, res) => {
-    let recipeID = req.query.recipeID;
-    if(!recipeID) {
-        res.status("400").send("Endpoint requires recipeID");
-        return;
-    }
-    let result = await db.getRecipes(recipeID)
+    let result = await db.getRecipes();
     if (!result) {
         res.status("500").send("Database error");
         return;

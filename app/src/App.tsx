@@ -24,7 +24,7 @@ const App: React.FC = () => {
             {renderPage()}
         </Container>
         <Typography sx={{position: "fixed", bottom: 0, textAlign: "center", mx: "auto", width: "100%"}}>
-            {"2022 | Made with <3 Aidan, Kirk, and Mo"}
+            {"2022 ©️ | Made with ❤️ Aidan, Kirk, and Mo"}
         </Typography>
     </>;
 }

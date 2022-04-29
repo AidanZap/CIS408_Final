@@ -2,6 +2,7 @@ import React from 'react';
 import { Stack, Typography, Divider, Button } from "@mui/material";
 import Increment from "./Increment";
 import { Recipe } from "../../interfaces";
+import RecipeAPI from "../Recipes/RecipeAPI";
 import GroceryCardGrid from "./GroceryCardGrid";
 
 interface IProps {
@@ -10,14 +11,21 @@ interface IProps {
 
 const GroceryList: React.FC<IProps> = (props: IProps) => {
 
-    const testRecipes = [{recipeID: 1, name: "sauce"}, {recipeID: 2, name: "meatballs"},
-                            {recipeID: 3, name: "sauce"}, {recipeID: 4, name: "meatballs"},
-                            {recipeID: 5, name: "sauce"}, {recipeID: 6, name: "meatballs"},
-                            {recipeID: 7, name: "sauce"}, {recipeID: 8, name: "meatballs"}];
-
     const [numberOfMeals, setNumberOfMeals] = React.useState<number>(5);
-    const [recipes, setRecipes] = React.useState<Recipe[]>(testRecipes);
+    const [recipes, setRecipes] = React.useState<Recipe[] | null>(null);
     const [selectedRecipes, setSelectedRecipes] = React.useState<Record<string, number>>({});
+
+    React.useEffect(() => {
+        let isMounted = true;
+        RecipeAPI.getRecipes().then((result: Recipe[]) => {
+            if (isMounted) {
+                setRecipes(result);
+            }
+        }).catch((er: Error) => {
+            console.log(`Error fetching Recipes | ${er}`);
+        });
+        return () => { isMounted = false; }
+    }, []);
 
     const changeRecipeQuantity = (recipeID: number, amount: number) => {
         if (recipeID in selectedRecipes) {

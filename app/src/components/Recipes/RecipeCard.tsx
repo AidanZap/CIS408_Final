@@ -24,7 +24,7 @@ const RecipeCard: React.FC<IProps> = (props: IProps) => {
                     {props.name}
                 </Typography>
             <CardActions disableSpacing sx={{justifyContent: "end"}}>
-                <Button variant="contained" onClick={() => {props.editRecipe(props.recipeID)}}>Edit</Button>
+                <Button variant="contained" color="secondary" onClick={() => {props.editRecipe(props.recipeID)}}>Edit</Button>
             </CardActions>
             </CardContent>
         </Card>
