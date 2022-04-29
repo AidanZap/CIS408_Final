@@ -4,7 +4,7 @@ let config;
 
 const initDatabase = async () => {
     try {
-        const data = await fs.readFile("./api/example_config.json");
+        const data = await fs.readFile("./api/config.json");
         config = JSON.parse(data);
         process.stdout.write("Config loaded properly, database ready!\n");
     } catch(err) {
@@ -54,39 +54,44 @@ const createTables = async () => {
     )`);
 }
 
-const getIngredients = async (ingredientID) => {
-    let result = await makeQuery(`SELECT ri.Name, i.Unit, i.Category WHERE ri.IngredientID=${ingredientID}`);
+const getIngredients = async () => {
+    let result = await makeQuery("SELECT IngredientID, Name, Unit, Category FROM Ingredients");
     let ingredients =[];
     result.recordset.forEach((record) => {
-        ingredients.push({"Name": record.Name, "Unit": record.Unit, "Category": record.Category})})
-        return ingredients;
+        ingredients.push({"IngredientID": record.IngredientID, "Name": record.Name, "Unit": record.Unit, "Category": record.Category});
+    });
+    return ingredients;
+}
 
 const insertBaseIngredients = async () => {
     try {
         const data = JSON.parse(await fs.readFile("./api/base_ingredients.json"));
-        data.forEach((i) => {
-            //process.stdout.write(`${i["name"]} | ${i["unit"]} | ${i["category"]}\n`)
-            //TODO Call ingredient insert here
-        });
+        for (const i of data) {
+            await insertIngredient(i["name"], i["unit"], i["category"]);
+        }
     } catch(err) {
         process.stdout.write(`Error reading base recipes\n${err}\n`);
     }
+}
 
-const insertIngredients = async (name, unit, category) => {
+const insertIngredient = async (name, unit, category) => {
     return await makeQuery(`INSERT INTO Ingredients (Name, Unit, Category)
         VALUES ('${name}', '${unit}', '${category}')`);
 }
-const deleteIngredients = async (ingredientID) => {
+const deleteIngredient = async (ingredientID) => {
     return await makeQuery(`DELETE FROM Recipes WHERE IngredientID = ${ingredientID}`);
 }
 
-const getRecipes = async (recipeID) => {
-    let result = await makeQuery(`SELECT ri.Name, ri.RecipeID WHERE ri.RecipeID=${recipeID}`);
+const getRecipes = async () => {
+    let result = await makeQuery("SELECT RecipeID, [Name] FROM Recipes");
     let recipes = [];
-    result.recordset.forEach((record) => {
-        recipes.push({"Name": record.Name})})
-        return recipes;
+    for (const recipe of result.recordset) {
+        let ingredients = await getRecipeIngredients(recipe.RecipeID);
+        recipes.push({"recipeID": recipe.RecipeID, "name": recipe.Name, "ingredients": ingredients});
+    }
+    return recipes;
 }
+
 const insertRecipes = async (name) => {
     return await makeQuery(`INSERT INTO Recipes (Name) VALUES ('${name}')`);
 }
@@ -101,7 +106,7 @@ const getRecipeIngredients = async (recipeID) => {
         WHERE ri.RecipeID=${recipeID}`);
     let ingredients = [];
     result.recordset.forEach((record) => {
-        ingredients.push({"IngredientID": record.IngredientID, "Name": record.Name, "Quantity": record.Quantity, "Unit": record.Unit, "Category": record.Category})
+        ingredients.push({"ingredientID": record.IngredientID, "name": record.Name, "quantity": record.Quantity, "unit": record.Unit, "category": record.Category})
     })
     return ingredients;
 }
@@ -118,11 +123,12 @@ const deleteRecipeIngredient = async (recipeID, ingredientID) => {
 
 const main = async () => {
     await initDatabase();
+    await insertBaseIngredients();
 }
 
-// main();
-
 module.exports = {
-    initDatabase, getRecipeIngredients, insertRecipeIngredient, deleteRecipeIngredient, getRecipes, 
-    insertRecipes, deleteRecipes, getIngredients, insertIngredients, deleteIngredients
+    initDatabase,
+    getRecipeIngredients, insertRecipeIngredient, deleteRecipeIngredient,
+    getRecipes, insertRecipes, deleteRecipes,
+    getIngredients, insertIngredient, deleteIngredient
 };

@@ -8,7 +8,8 @@ export interface Ingredient {
 
 export interface Recipe {
     recipeID: number,
-    name: string
+    name: string,
+    ingredients: Ingredient[]
 }
 
 export enum RestMethod {
