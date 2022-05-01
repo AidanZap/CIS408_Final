@@ -1,11 +1,11 @@
 import React from 'react';
 import { Card, CardMedia, CardContent, CardActions, Typography, Button } from "@mui/material";
+import { Recipe } from '../../interfaces';
 
 interface IProps {
-    recipeID: number,
-    name: string,
+    recipe: Recipe,
     image: string | null,
-    editRecipe: (recipeID: number) => void
+    editRecipe: (recipe: Recipe) => void
 }
 
 const RecipeCard: React.FC<IProps> = (props: IProps) => {
@@ -18,13 +18,13 @@ const RecipeCard: React.FC<IProps> = (props: IProps) => {
                 component="img"
                 height="200"
                 image={props.image ? props.image : placeholderPath}
-                alt={props.image ? props.name : `placeholder for ${props.name}`} />
+                alt={props.image ? props.image : `placeholder for ${props.recipe.name}`} />
             <CardContent>
                 <Typography gutterBottom variant="h5" component="div">
-                    {props.name}
+                    {props.recipe.name}
                 </Typography>
             <CardActions disableSpacing sx={{justifyContent: "end"}}>
-                <Button variant="contained" color="secondary" onClick={() => {props.editRecipe(props.recipeID)}}>Edit</Button>
+                <Button variant="contained" color="secondary" onClick={() => {props.editRecipe(props.recipe)}}>Edit</Button>
             </CardActions>
             </CardContent>
         </Card>

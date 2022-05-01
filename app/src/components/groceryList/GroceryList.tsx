@@ -17,7 +17,7 @@ const GroceryList: React.FC<IProps> = (props: IProps) => {
 
     React.useEffect(() => {
         let isMounted = true;
-        RecipeAPI.getRecipes().then((result: Recipe[]) => {
+        RecipeAPI.getAllRecipes().then((result: Recipe[]) => {
             if (isMounted) {
                 setRecipes(result);
             }
