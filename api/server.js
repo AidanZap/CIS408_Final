@@ -12,21 +12,15 @@ app.use(function(req, res, next) {
 // Endpoints for Ingredients Table 
 
 const ingredientRouter = express.Router();
-app.use('/ingredient', ingredientRouter);
+app.use('/ingredients', ingredientRouter);
 
 ingredientRouter.get("/", async (req, res) => {
-    let ingredientID = req.query.ingredientID;
-    if(!ingredientID) {
-        res.status("400").send("Endpoint requires ingredientID");
-        return;
-    }
-    let result = await db.getRecipeIngredients(ingredientID)
+    let result = await db.getIngredients()
     if (!result) {
         res.status("500").send("Database error");
         return;
     }
     res.status("200").send(result);
-    
 });
 
 ingredientRouter.post("/", async (req, res) => {

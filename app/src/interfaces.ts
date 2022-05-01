@@ -1,4 +1,10 @@
-export interface Ingredient {
+export interface Recipe {
+    recipeID: number,
+    name: string,
+    ingredients: RecipeIngredient[]
+}
+
+export interface RecipeIngredient {
     ingredientID: number,
     name: string,
     quantity: number,
@@ -6,10 +12,11 @@ export interface Ingredient {
     category: string
 }
 
-export interface Recipe {
-    recipeID: number,
+export interface Ingredient {
+    ingredientID: number,
     name: string,
-    ingredients: Ingredient[]
+    unit: string,
+    category: string
 }
 
 export enum RestMethod {

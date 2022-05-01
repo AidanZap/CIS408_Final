@@ -58,7 +58,7 @@ const getIngredients = async () => {
     let result = await makeQuery("SELECT IngredientID, Name, Unit, Category FROM Ingredients");
     let ingredients =[];
     result.recordset.forEach((record) => {
-        ingredients.push({"IngredientID": record.IngredientID, "Name": record.Name, "Unit": record.Unit, "Category": record.Category});
+        ingredients.push({"ingredientID": record.IngredientID, "name": record.Name, "unit": record.Unit, "category": record.Category});
     });
     return ingredients;
 }

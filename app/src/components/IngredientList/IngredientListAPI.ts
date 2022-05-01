@@ -1,5 +1,5 @@
 import Request from "../../requests";
-import { RestMethod, Ingredient } from "../../interfaces";
+import { RestMethod, RecipeIngredient } from "../../interfaces";
 
 export default class IngredientListAPI {
 
@@ -11,7 +11,7 @@ export default class IngredientListAPI {
         return response.text();
     }
 
-    static insertIngredientList = async (recipeID: string, ingredients: Ingredient[]) => {
+    static insertIngredientList = async (recipeID: string, ingredients: RecipeIngredient[]) => {
         for (const ingredient of ingredients) {
             await Request(
                 "http://localhost:5000/recipeIngredient/",

@@ -1,5 +1,5 @@
 import React from "react";
-import { Ingredient } from "../../interfaces";
+import { RecipeIngredient } from "../../interfaces";
 import IngredientListAPI from "./IngredientListAPI";
 
 interface IProps {
@@ -8,7 +8,7 @@ interface IProps {
 
 const IngredientList: React.FC<IProps> = (props: IProps) => {
 
-    let [ingredientList, setIngredientList] = React.useState<Ingredient[] | null>(null);
+    let [ingredientList, setIngredientList] = React.useState<RecipeIngredient[] | null>(null);
 
     React.useEffect(() => {
         let isMounted = true;

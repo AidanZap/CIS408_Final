@@ -5,7 +5,7 @@ import { Grid } from "@mui/material";
 
 interface IProps {
     recipes: Recipe[] | null,
-    editRecipe: (recipeID: number) => void;
+    editRecipe: (recipe: Recipe) => void;
 }
 
 const RecipeCardGrid: React.FC<IProps> = (props: IProps) => {
@@ -16,7 +16,7 @@ const RecipeCardGrid: React.FC<IProps> = (props: IProps) => {
         return <Grid container direction="row" spacing={2} justifyContent="flex-start" alignItems="flex-start">
             {props.recipes!.map((recipe: Recipe, index: number) => {
                 return <Grid item xs={12} md={6} lg={4} key={index}>
-                    <RecipeCard recipeID={recipe.recipeID} name={recipe.name} image={null} editRecipe={props.editRecipe} />
+                    <RecipeCard recipe={recipe} image={null} editRecipe={props.editRecipe} />
                 </Grid>
             })}
         </Grid>;
