@@ -92,8 +92,33 @@ const getRecipes = async () => {
     return recipes;
 }
 
-const insertRecipes = async (name) => {
-    return await makeQuery(`INSERT INTO Recipes (Name) VALUES ('${name}')`);
+const createGroceryList = async (selections) => {
+    let groceryList = []
+    for (const recipeID in selections) {
+        let amount = selections[recipeID];
+        let result = await getRecipeIngredients(recipeID);
+        result.forEach((recipeIngredient) =>  {
+            let index = groceryList.findIndex((i) => i.ingredientID === recipeIngredient.ingredientID);
+            if (index === -1) {
+                groceryList.push({...recipeIngredient, quantity: recipeIngredient.quantity * amount});
+            } else {
+                groceryList[index].quantity = groceryList[index].quantity + (recipeIngredient.quantity * amount);
+            }
+        });
+    }
+    return groceryList;
+}
+
+const insertRecipe = async (name, ingredients) => {
+    let result = await makeQuery(`INSERT INTO Recipes (Name) VALUES ('${name}')`);
+    if (!result || result === null) return result;
+    let newRecipeID = await makeQuery(`SELECT RecipeID FROM Recipes WHERE Name='${name}'`);
+    newRecipeID = newRecipeID.recordset[0].RecipeID;
+    for (let i=0; i<ingredients.length; i++) {
+        let ingredient = ingredients[i];
+        await insertRecipeIngredient(newRecipeID, ingredient.ingredientID, ingredient.quantity);
+    }
+    return newRecipeID;
 }
 
 const deleteRecipes = async (recipeID) => {
@@ -126,9 +151,11 @@ const main = async () => {
     await insertBaseIngredients();
 }
 
+main();
+
 module.exports = {
-    initDatabase,
+    initDatabase, createGroceryList,
     getRecipeIngredients, insertRecipeIngredient, deleteRecipeIngredient,
-    getRecipes, insertRecipes, deleteRecipes,
+    getRecipes, insertRecipe, deleteRecipes,
     getIngredients, insertIngredient, deleteIngredient
 };
