@@ -56,7 +56,7 @@ const GroceryList: React.FC<IProps> = (props: IProps) => {
         if (!selectedRecipes || Object.keys(selectedRecipes).length < 1) {
             console.log("No recipes selected!");
         } else {
-            let totalSelected = Object.values(selectedRecipes).reduce((amount) => amount);
+            let totalSelected = Object.values(selectedRecipes).reduce((prev, current) => prev + current);
             if (totalSelected < numberOfMeals) {
                 console.log(`Need to select ${numberOfMeals - totalSelected} more recipes`);
             } else if (totalSelected > numberOfMeals) {

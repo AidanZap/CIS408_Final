@@ -148,10 +148,9 @@ const deleteRecipeIngredient = async (recipeID, ingredientID) => {
 
 const main = async () => {
     await initDatabase();
+    await createTables();
     await insertBaseIngredients();
 }
-
-main();
 
 module.exports = {
     initDatabase, createGroceryList,

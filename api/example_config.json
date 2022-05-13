@@ -1,8 +1,8 @@
     {
-    "server": "DESKTOP-FKS3DA5\\MSSQLSERVER2",
-    "database": "REACTAPP",
-    "driver": "msnodesqlv8",
-    "port": "1433",
+    "server": "PUT SERVER HERE",
+    "database": "PUT DATABASE HERE",
+    "driver": "PUT DRIVER HERE",
+    "port": "PUT PORT HERE",
     "options": {
         "trustedConnection": true,
         "trustServerCertificate": true
